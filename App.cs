@@ -1,10 +1,18 @@
+using System.Text.Json;
+using cli_api_github_integration.Interfaces;
+using cli_api_github_integration.Models;
 using CommandLine;
-using CommandLine.Text;
 
-namespace CliApiGithubIntegration;
+namespace cli_api_github_integration;
 
 public class App
 {
+    private readonly IGithubServices _githubServices;
+
+    public App(IGithubServices githubServices)
+    {
+        _githubServices = githubServices;
+    }
     public void Run(string[] args)
     {
         var parserResult = Parser
@@ -12,13 +20,8 @@ public class App
             .ParseArguments<GithubRequestModel>(args)
             .WithParsed(name =>
             {
-                
+                var obj = JsonSerializer.Serialize(name);
+                Console.WriteLine(obj);
             });
     }
-}
-
-public class GithubRequestModel
-{
-    [Option('u', "username", Required = true, HelpText = "Should provider a username for searching.")]
-    public string UserName { get; set; }
 }

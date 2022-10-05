@@ -1,4 +1,5 @@
-﻿using CliApiGithubIntegration;
+﻿using cli_api_github_integration.Interfaces;
+using cli_api_github_integration.Services;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace cli_api_github_integration
@@ -17,6 +18,7 @@ namespace cli_api_github_integration
         {
             var serviceCollection = new ServiceCollection();
             serviceCollection.AddScoped<App>();
+            serviceCollection.AddScoped<IGithubServices, GithubServices>();
             return serviceCollection;
         }
     }
