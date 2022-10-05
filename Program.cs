@@ -1,6 +1,7 @@
 ﻿using cli_api_github_integration.Interfaces;
 using cli_api_github_integration.Services;
 using Microsoft.Extensions.DependencyInjection;
+using Refit;
 
 namespace cli_api_github_integration
 {
@@ -19,6 +20,11 @@ namespace cli_api_github_integration
             var serviceCollection = new ServiceCollection();
             serviceCollection.AddScoped<App>();
             serviceCollection.AddScoped<IGithubServices, GithubServices>();
+            serviceCollection.AddRefitClient<IGithubServices>()
+                .ConfigureHttpClient(config =>
+                {
+                    config.BaseAddress = new Uri("https://api.github.com/");
+                });
             return serviceCollection;
         }
     }
