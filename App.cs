@@ -21,17 +21,10 @@ public class App
             .ParseArguments<GithubRequestModel>(args)
             .WithParsedAsync(async name =>
             {
-                try
-                {
-                    var userRepositories
-                        = await _githubServices.GetUserRepositories(name.UserName);
+                var userRepositories
+                    = await _githubServices.GetUserRepositories(name.UserName);
 
                 Console.WriteLine(JsonSerializer.Serialize(userRepositories));
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e);
-                }
             });
     }
 }
