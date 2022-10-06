@@ -18,7 +18,6 @@ namespace cli_api_github_integration
         {
             var serviceCollection = new ServiceCollection();
             serviceCollection.AddScoped<App>();
-            // serviceCollection.AddScoped<IGithubServices, GithubServices>();
             serviceCollection.AddRefitClient<IGithubServices>()
                 .ConfigureHttpClient(config =>
                 {
