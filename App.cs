@@ -1,6 +1,6 @@
 using System.Text.Json;
 using cli_api_github_integration.Interfaces;
-using cli_api_github_integration.Models;
+using cli_api_github_integration.Resources;
 using CommandLine;
 
 namespace cli_api_github_integration;
@@ -13,15 +13,25 @@ public class App
     {
         _githubServices = githubServices;
     }
-    public void Run(string[] args)
+
+    public async Task Run(string[] args)
     {
-        var parserResult = Parser
+        await Parser
             .Default
             .ParseArguments<GithubRequestModel>(args)
-            .WithParsed(name =>
+            .WithParsedAsync(async name =>
             {
-                var obj = JsonSerializer.Serialize(name);
-                Console.WriteLine(obj);
+                try
+                {
+                    var userRepositories
+                        = await _githubServices.GetUserRepositories(name.UserName);
+
+                Console.WriteLine(JsonSerializer.Serialize(userRepositories));
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                }
             });
     }
 }

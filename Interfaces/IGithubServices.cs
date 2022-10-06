@@ -1,10 +1,10 @@
-using cli_api_github_integration.Models;
+using cli_api_github_integration.Resources;
 using Refit;
 
 namespace cli_api_github_integration.Interfaces;
 
 public interface IGithubServices
 {
-    [Get("users/username/repos")]
-    Task<List<GitHubResponse>> GetUserRepositories(string userName);
+    [Get("/users/{userName}/repos")]
+    Task<IEnumerable<GitHubResponse>> GetUserRepositories(string userName);
 }
