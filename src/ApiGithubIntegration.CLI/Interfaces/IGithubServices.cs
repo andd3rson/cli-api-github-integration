@@ -4,5 +4,5 @@ namespace cli_api_github_integration.Interfaces;
 
 public interface IGithubServices
 {
-    Task<IEnumerable<GitHubResponse>> Get(string username);
+    Task<Response<IEnumerable<GitHubResponse>>> GetRepos(string username);
 }

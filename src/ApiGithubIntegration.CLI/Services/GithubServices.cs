@@ -11,9 +11,9 @@ public class GithubServices : IGithubServices
     {
         _githubSearch = githubSearch;
     }
-    public async Task<IEnumerable<GitHubResponse>> Get(string username)
+    public async Task<Response<IEnumerable<GitHubResponse>>> GetRepos(string username)
     {
-        return await _githubSearch.GetUserRepositories(username);
-        
+        var request = await _githubSearch.GetUserRepositories(username);
+        return new Response<IEnumerable<GitHubResponse>>(request, request.Any());
     }
 }
