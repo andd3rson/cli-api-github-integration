@@ -22,9 +22,9 @@ namespace cli_api_github_integration
                 .WithParsedAsync(async name =>
                 {
                     var userRepositories
-                        = await _githubServices.GetUserRepositories(name.UserName);
+                        = await _githubServices.Get(name.UserName);
 
-                    Console.WriteLine(JsonSerializer.Serialize(userRepositories));
+                    Console.WriteLine(userRepositories.FirstOrDefault().Name);
                 });
         }
     }

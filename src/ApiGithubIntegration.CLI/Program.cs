@@ -1,4 +1,5 @@
 ﻿using cli_api_github_integration.Interfaces;
+using cli_api_github_integration.Services;
 using Microsoft.Extensions.DependencyInjection;
 using Refit;
 
@@ -18,7 +19,8 @@ namespace cli_api_github_integration
         {
             var serviceCollection = new ServiceCollection();
             serviceCollection.AddScoped<App>();
-            serviceCollection.AddRefitClient<IGithubServices>()
+            serviceCollection.AddScoped<IGithubServices, GithubServices>();
+            serviceCollection.AddRefitClient<IGithubSearch>()
                 .ConfigureHttpClient(config =>
                 {
                     config.DefaultRequestHeaders.Add("User-Agent", "request");

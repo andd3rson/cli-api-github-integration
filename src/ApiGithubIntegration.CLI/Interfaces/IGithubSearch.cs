@@ -3,7 +3,7 @@ using Refit;
 
 namespace cli_api_github_integration.Interfaces;
 
-public interface IGithubServices
+public interface IGithubSearch
 {
     [Get("/users/{userName}/repos")]
     Task<IEnumerable<GitHubResponse>> GetUserRepositories(string userName);
