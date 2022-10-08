@@ -11,9 +11,19 @@ public class GithubServices : IGithubServices
     {
         _githubSearch = githubSearch;
     }
+
     public async Task<Response<IEnumerable<GitHubResponse>>> GetRepos(string username)
     {
-        var request = await _githubSearch.GetUserRepositories(username);
-        return new Response<IEnumerable<GitHubResponse>>(request, request.Any());
+        try
+        {
+            //TODO: A success response. 
+            var request = await _githubSearch.GetUserRepositories(username);
+            return new Response<IEnumerable<GitHubResponse>>(request, request.Any());
+        }
+        catch (Exception e)
+        {
+            // TODO: a error response getting all errors
+            return new Response<IEnumerable<GitHubResponse>>(null, false);
+        }
     }
 }

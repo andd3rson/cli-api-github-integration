@@ -7,4 +7,7 @@ public interface IGithubSearch
 {
     [Get("/users/{userName}/repos")]
     Task<IEnumerable<GitHubResponse>> GetUserRepositories(string userName);
+    
+    
+    
 }
