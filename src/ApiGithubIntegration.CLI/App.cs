@@ -22,11 +22,16 @@ namespace cli_api_github_integration
                 .WithParsedAsync(async name =>
                 {
                     var userRepositories
-                        = await _githubServices.GetRepos(name.UserName);
+                        = await GetReposAsync(name.UserName);
                     
-                    Console.WriteLine(JsonSerializer.Serialize(userRepositories));
+                    // Console.WriteLine(JsonSerializer.Serialize(userRepositories));
                 });
             
+        }
+
+        private async Task<Response<IEnumerable<GitHubResponse>>> GetReposAsync(string name)
+        {
+           return await _githubServices.GetRepos(name);
         }
     }
 }

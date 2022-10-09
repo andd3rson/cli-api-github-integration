@@ -24,7 +24,7 @@ public class GithubServicesTests
     }
 
     [Fact]
-    public async Task GetRepos_ShouldReturnSuccess_WhenUserExists()
+    public async Task GetRepos_ShouldReturnSuccess_WhenUserIsValid()
     {
         // Arrange
         string userName = "andd3rson";
@@ -37,15 +37,19 @@ public class GithubServicesTests
     }
 
     [Fact]
-    public async Task GetRepos_ShouldReturnFalse_WhenNotFoundUser()
+    public async Task GetRepos_ShouldReturnFalse_WhenUserIsNotValid()
     {
+        
         // Arrange
+        string expectedMessage = "Response status code does not indicate success: 404 (Not Found).";
         string userName = "valid@3ashkxlmas";
         var sut = new GithubServices(_githubSearch);
         // Action
         var result = await sut.GetRepos(userName);
         //Assert
         result.IsSuccess.Should().BeFalse();
+        result.Errors.Should().NotBeNullOrEmpty();
+        result.Errors.FirstOrDefault().Should().Be(expectedMessage);
     }
 
     [Fact]
