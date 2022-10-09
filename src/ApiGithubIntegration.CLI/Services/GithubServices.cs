@@ -23,7 +23,7 @@ public class GithubServices : IGithubServices
         catch (Exception e)
         {
             // TODO: a error response getting all errors
-            return new Response<IEnumerable<GitHubResponse>>(null, false);
+            return new Response<IEnumerable<GitHubResponse>>(new[] { e.Message });
         }
     }
 }
