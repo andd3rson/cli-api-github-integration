@@ -1,16 +1,12 @@
 ### Describing project
 
-<p>
-This project is a Console Application using c-sharp. It's command line interface and works a consume api from github repositories.<br >
-</p>
-I built for studying and applied concepts likes inversion dependency, container injection and used refit for calling apis. <br>
+This project is a csharp console application. It's a command line interface(CLI). it works consuming an api from github.
+
 
 ### Running this project
 
-<p> 
-  you should go at <strong><i>".../src/ApiGithubIntegration.CLI"</i> </strong> for run this project.<br />
-  pay attention, it's necessary provide an argument to search.  
-</p>
+
+  you should go at `ApiGithubIntegration.CLI` to run this project. Pay attention, you need to provide an argument
 
          dotnet run -u [username]
 
